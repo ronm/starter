@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - helpers
+  theme:
+    - subtheme
+id: hero
+theme: subtheme
+region: highlighted
+weight: -6
+provider: null
+plugin: hero_block
+settings:
+  id: hero_block
+  label: Hero
+  provider: helpers
+  label_display: '0'
+visibility: {  }

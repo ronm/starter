@@ -1,0 +1,99 @@
+<?php
+
+//use Drupal\Core\Menu\MenuTreeParameters;
+//use Drupal\Core\Path\AliasManagerInterface;
+
+// Add your custom theme override functions here.
+
+/**
+ * Implements hook_preprocess_block()
+ */
+/*function subtheme_preprocess_block(&$variables) {
+	//$block_id = $variables['elements']['#id'];	
+}*/
+
+function subtheme_theme_suggestions_block_alter(&$suggestions, $variables) {
+	$content = $variables['elements']['content'];
+	if (isset($content['#block_content']) && $content['#block_content'] instanceof \Drupal\block_content\BlockContentInterface) {
+    	$suggestions[] = 'block__' . $content['#block_content']->bundle();
+	}
+}
+
+
+/**
+ * Implements template_preprocess_field().
+ */
+//function subtheme_preprocess_field(&$variables) {}
+
+/**
+ * Implements template_preprocess_html().
+ *
+ * Adds additional classes
+ */
+//function subtheme_preprocess_html(&$variables) {}
+
+/**
+ * Implements template_preprocess_node
+ *
+ * Add template suggestions and classes
+ */
+function subtheme_preprocess_node(&$variables) {
+	$variables['attributes']['class'][] = 'type-' . $variables['elements']['#node']->getType();
+}
+
+/**
+ * Implements template_preprocess_page
+ *
+ * Add convenience variables and template suggestions
+ */
+function subtheme_preprocess_page(&$variables) {
+	global $base_url;
+	
+	$logo = theme_get_setting('logo');
+	$variables['logopath'] = $logo['url'];
+	$variables['site_url'] = $base_url;
+	
+	if (!empty($variables['page']['highlighted'])) {
+		$highlighted_classes = $variables['page']['highlighted']['#attributes']['class'];
+		foreach(array('panel', 'callout') as &$klass) {
+			if ( $index = array_search($klass, $highlighted_classes) ) {
+				unset($variables['page']['highlighted']['#attributes']['class'][$index]);
+			}
+		}
+	}
+	
+	// Convenience variables
+	$left = $variables['page']['sidebar_first'];
+	$right = $variables['page']['sidebar_second'];
+
+	// Dynamic sidebars
+	if (!empty($left) && !empty($right)) {
+	    $variables['main_grid'] = 'large-6 large-push-3 small-12';
+	    $variables['sidebar_first_grid'] = 'large-3 large-pull-6 small-12';
+	    $variables['sidebar_sec_grid'] = 'large-3 small-12';
+  	} elseif (empty($left) && !empty($right)) {
+	    $variables['main_grid'] = 'large-8 small-12';
+		$variables['sidebar_first_grid'] = 'small-12';
+		$variables['sidebar_sec_grid'] = 'large-4 small-12';
+  	} elseif (!empty($left) && empty($right)) {
+  		$variables['main_grid'] = 'large-8 large-push-4 small-12';
+  		$variables['sidebar_first_grid'] = 'large-4 large-pull-8 small-12';
+  		$variables['sidebar_sec_grid'] = 'small-12';
+  	} else {
+	    $variables['main_grid'] = 'large-12 small-12';
+	    $variables['sidebar_first_grid'] = 'small-12';
+	    $variables['sidebar_sec_grid'] = 'small-12';
+	}
+	
+}
+
+/**
+ * Implements template_preprocess_views_view().
+ */
+//function subtheme_preprocess_views_view(&$variables) {}
+
+
+function subtheme_form_contact_message_feedback_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {  
+	$form['name']['#title'] = "Name";
+	$form['mail']['#title'] = "Email";
+}

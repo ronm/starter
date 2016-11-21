@@ -1,0 +1,16 @@
+global:
+  version: 1.x
+  css:
+    base:
+      css/foundation.min.css: {}
+      css/app.drupal.css: {}      
+#      css/animate.css: {}
+#      css/slick.css: {}
+      css/app.css: {}
+  js:
+#    js/slick.min.js: {}
+#    js/smoothScroll.js: {}
+    js/app.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery

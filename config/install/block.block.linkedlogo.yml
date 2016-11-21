@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - helpers
+  theme:
+    - subtheme
+id: linkedlogo
+theme: subtheme
+region: header
+weight: -4
+provider: null
+plugin: linkedlogo_block
+settings:
+  id: linkedlogo_block
+  label: 'Linked Logo'
+  provider: helpers
+  label_display: '0'
+visibility: {  }

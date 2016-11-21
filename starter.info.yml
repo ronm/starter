@@ -1,0 +1,49 @@
+name: Starter
+type: profile
+description: 'Install with commonly used features pre-configured.'
+# version: VERSION
+core: 8.x
+dependencies:
+  - node
+  - block
+  - ckeditor
+  - config
+  - contextual
+  - contact
+  - menu_link_content
+  - datetime
+  - block_content
+  - quickedit
+  - editor
+  - image
+  - menu_ui
+  - options
+  - path
+  - page_cache
+  - dynamic_page_cache
+  - taxonomy
+  - dblog
+  - toolbar
+  - field_ui
+  - file
+  - rdf
+  - views
+  - views_ui
+  - big_pipe
+  - automated_cron
+  - admin_toolbar
+  - admin_toolbar_tools
+  - block_class
+#  - contact_storage
+  - ctools
+  - fast404
+  - field_collection
+  - form_placeholder
+  - helpers
+  - metatag
+  - pathauto
+  - token
+  - weight
+themes:
+  - subtheme
+  - seven
